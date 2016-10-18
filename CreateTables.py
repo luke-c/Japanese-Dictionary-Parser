@@ -1,7 +1,7 @@
 import sqlite3
 
 conn = sqlite3.connect('dictionary.db')
-print("Opened/created database sucessfully")
+print("Opened/created database successfully")
 
 c = conn.cursor()
 
