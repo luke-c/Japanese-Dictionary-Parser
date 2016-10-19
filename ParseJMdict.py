@@ -2,7 +2,7 @@ import xml.etree.ElementTree as ET
 import sqlite3
 import time
 
-tree = ET.parse('JMdict_e.xml') # Change to JMdict_e.xml for real testing
+tree = ET.parse('JMdict_e.xml')
 root = tree.getroot()
 
 conn = sqlite3.connect('dictionary.db')
@@ -12,12 +12,14 @@ c = conn.cursor()
 
 count = 0
 start_time = time.time()
+print("Starting parsing of JMdict_e")
+
 # For every entry
-for entry in root.findall('entry'): # Change to findAll for real testing
+for entry in root.findall('entry'):
     entryId = entry.find('ent_seq').text
     count += 1
 
-    for k_ele in entry.findall('k_ele'): # For every Kanji Element in an entry
+    for k_ele in entry.findall('k_ele'):  # For every Kanji Element in an entry
         keb = k_ele.find('keb').text 
         c.execute('INSERT INTO Kanji_Element (ENTRY_ID, VALUE) VALUES (?, ?)',
                   (entryId, keb))
@@ -27,7 +29,7 @@ for entry in root.findall('entry'): # Change to findAll for real testing
             c.execute('INSERT INTO Priority (ENTRY_ID, VALUE, TYPE) VALUES (?, ?, ?)',
                       (entryId, priority.text, 'Kanji_Element'))
 
-    for r_ele in entry.findall('r_ele'): # For every Reading Element in an entry
+    for r_ele in entry.findall('r_ele'):  # For every Reading Element in an entry
         reb = r_ele.find('reb').text
         c.execute('INSERT INTO Reading_Element (ENTRY_ID, VALUE) VALUES (?, ?)',
                   (entryId, reb))
@@ -37,7 +39,7 @@ for entry in root.findall('entry'): # Change to findAll for real testing
             c.execute('INSERT INTO Priority (ENTRY_ID, VALUE, TYPE) VALUES (?, ?, ?)',
                       (entryId, priority.text, 'Reading_Element'))
 
-    for sense in entry.findall('sense'): # For every Sense element in an entry
+    for sense in entry.findall('sense'):  # For every Sense element in an entry
         c.execute('INSERT INTO Sense_Element (ENTRY_ID) VALUES (?)',
                   (entryId,))
 
@@ -69,5 +71,6 @@ for entry in root.findall('entry'): # Change to findAll for real testing
 conn.commit()
 conn.close()
 
+print("Completed parsing of JMdict_e")
 print("Number of entries parsed:", count)
 print("--- %s seconds ---" % (time.time() - start_time))
