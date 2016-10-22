@@ -5,10 +5,10 @@ print("Opened database successfully")
 
 c = conn.cursor()
 
-c.execute('DROP TABLE Kanji_Element')
+c.execute('''DROP TABLE Kanji_Element''')
 print("Dropped Kanji_Element Table")
 
-c.execute('DROP TABLE Reading_Element')
+c.execute('''DROP TABLE Reading_Element''')
 print("Dropped Reading_Element Table")
 
 c.execute('''DROP TABLE Sense_Element''')
