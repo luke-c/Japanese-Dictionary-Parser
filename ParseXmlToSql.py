@@ -56,25 +56,13 @@ def parse_jmdict(xml_file='JMdict_e.xml'):
 
             pos_list = sense.findall('pos')
             for pos in pos_list:
-                c.execute('INSERT INTO Jmdict_Pos (VALUE) VALUES (?)',
-                          (pos.text,))
-
-                c.execute('SELECT last_insert_rowid()')
-                pos_id = c.fetchone()[0]
-
-                c.execute('INSERT INTO Jmdict_Pos_Link (POS_ID, SENSE_ID) VALUES (?, ?)',
-                          (pos_id, sense_id))
+                c.execute('INSERT INTO Jmdict_Sense_Pos (SENSE_ID, VALUE) VALUES (?, ?)',
+                          (sense_id, pos.text))
 
             gloss_list = sense.findall('gloss')
             for gloss in gloss_list:
-                c.execute('INSERT INTO Jmdict_Gloss (ENTRY_ID, VALUE) VALUES (?, ?)',
-                          (entry_id, gloss.text))
-
-                c.execute('SELECT last_insert_rowid()')
-                gloss_id = c.fetchone()[0]
-
-                c.execute('INSERT INTO Jmdict_Gloss_Link (GLOSS_ID, SENSE_ID) VALUES (?, ?)',
-                          (gloss_id, sense_id))
+                c.execute('INSERT INTO Jmdict_Gloss (ENTRY_ID, SENSE_ID, VALUE) VALUES (?, ?, ?)',
+                          (entry_id, sense_id, gloss.text))
 
         entries_processed += 1
     conn.commit()
