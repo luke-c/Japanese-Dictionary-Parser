@@ -126,7 +126,7 @@ def create_jmnedict_tables():
     c.execute('''CREATE INDEX Jmnedict_Reading_Relation_READING_ELEMENT_ID_Index
                     ON Jmnedict_Reading_Relation (READING_ELEMENT_ID)''')
 
-    # Sense Element
+    # Trans Element
     c.execute('''CREATE TABLE Jmnedict_Trans_Element
                 (_ID INTEGER PRIMARY KEY,
                  ENTRY_ID INTEGER NOT NULL)''')
@@ -145,7 +145,7 @@ def create_jmnedict_tables():
     c.execute('''CREATE INDEX Jmnedict_Gloss_TRANS_ELEMENT_ID_Index
             ON Jmnedict_Gloss (TRANS_ELEMENT_ID)''')
 
-    # Pos
+    # Name Type
     c.execute('''CREATE TABLE Jmnedict_Trans_Name_Type
             (_ID INTEGER PRIMARY KEY,
              TRANS_ELEMENT_ID INTEGER NOT NULL,
@@ -168,5 +168,5 @@ def create_jmnedict_tables():
 
 
 create_jmdict_tables()
-#create_jmnedict_tables()
+create_jmnedict_tables()
 conn.close()

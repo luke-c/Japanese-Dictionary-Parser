@@ -15,7 +15,6 @@ def drop_jmdict_tables():
     c.execute('''DROP TABLE Jmdict_Sense_Field''')
     c.execute('''DROP TABLE Jmdict_Sense_Dialect''')
     c.execute('''DROP TABLE Jmdict_Priority''')
-
     conn.commit()
     print("Dropped Jmdict Tables")
 
@@ -29,11 +28,10 @@ def drop_jmnedict_tables():
     c.execute('''DROP TABLE Jmnedict_Gloss''')
     c.execute('''DROP TABLE Jmnedict_Trans_Name_Type''')
     c.execute('''DROP TABLE Jmnedict_Priority''')
-
     conn.commit()
     print("Dropped Jmnedict Tables")
 
 
 drop_jmdict_tables()
-#drop_jmnedict_tables()
+drop_jmnedict_tables()
 conn.close()
