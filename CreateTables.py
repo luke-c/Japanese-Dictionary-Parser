@@ -19,7 +19,8 @@ def create_jmdict_tables():
     c.execute('''CREATE TABLE Jmdict_Reading_Element
             (_ID INTEGER PRIMARY KEY,
              ENTRY_ID INTEGER NOT NULL,
-             VALUE TEXT NOT NULL)''')
+             VALUE TEXT NOT NULL,
+             NO_KANJI INTEGER NOT NULL)''')
     c.execute('''CREATE INDEX Jmdict_Reading_Element_ENTRY_ID_Index
             ON Jmdict_Reading_Element (ENTRY_ID)''')
 
@@ -62,6 +63,24 @@ def create_jmdict_tables():
              FOREIGN KEY(SENSE_ID) REFERENCES Jmdict_Sense_Element(_ID))''')
     c.execute('''CREATE INDEX Jmdict_Sense_Pos_SENSE_ID_Index
                 ON Jmdict_Sense_Pos (SENSE_ID)''')
+
+    # Field
+    c.execute('''CREATE TABLE Jmdict_Sense_Field
+                (_ID INTEGER PRIMARY KEY,
+                 SENSE_ID INTEGER NOT NULL,
+                 VALUE TEXT NOT NULL,
+                 FOREIGN KEY(SENSE_ID) REFERENCES Jmdict_Sense_Element(_ID))''')
+    c.execute('''CREATE INDEX Jmdict_Sense_Field_SENSE_ID_Index
+                    ON Jmdict_Sense_Field (SENSE_ID)''')
+
+    # Dialect
+    c.execute('''CREATE TABLE Jmdict_Sense_Dialect
+                    (_ID INTEGER PRIMARY KEY,
+                     SENSE_ID INTEGER NOT NULL,
+                     VALUE TEXT NOT NULL,
+                     FOREIGN KEY(SENSE_ID) REFERENCES Jmdict_Sense_Element(_ID))''')
+    c.execute('''CREATE INDEX Jmdict_Sense_Dialect_SENSE_ID_Index
+                        ON Jmdict_Sense_Dialect (SENSE_ID)''')
 
     # Priority
     c.execute('''CREATE TABLE Jmdict_Priority
@@ -149,5 +168,5 @@ def create_jmnedict_tables():
 
 
 create_jmdict_tables()
-create_jmnedict_tables()
+#create_jmnedict_tables()
 conn.close()

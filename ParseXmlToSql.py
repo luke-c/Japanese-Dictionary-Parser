@@ -31,8 +31,12 @@ def parse_jmdict(xml_file='JMdict_e.xml'):
 
         for r_ele in entry.findall('r_ele'):  # For every Reading Element in an entry
             reb = r_ele.find('reb').text
-            c.execute('INSERT INTO Jmdict_Reading_Element (ENTRY_ID, VALUE) VALUES (?, ?)',
-                      (entry_id, reb))
+            re_nokanji = r_ele.find('re_nokanji')
+            re_nokanji_value = 0
+            if re_nokanji is not None:
+                re_nokanji_value = 1
+            c.execute('INSERT INTO Jmdict_Reading_Element (ENTRY_ID, VALUE, NO_KANJI) VALUES (?, ?, ?)',
+                          (entry_id, reb, re_nokanji_value))
 
             c.execute('SELECT last_insert_rowid()')
             r_ele_id = c.fetchone()[0]
@@ -63,6 +67,16 @@ def parse_jmdict(xml_file='JMdict_e.xml'):
             for gloss in gloss_list:
                 c.execute('INSERT INTO Jmdict_Gloss (ENTRY_ID, SENSE_ID, VALUE) VALUES (?, ?, ?)',
                           (entry_id, sense_id, gloss.text))
+
+            field_list = sense.findall('field')
+            for field in field_list:
+                c.execute('INSERT INTO Jmdict_Sense_Field (SENSE_ID, VALUE) VALUES (?, ?)',
+                          (sense_id, field.text))
+
+            dialect_list = sense.findall('dial')
+            for dial in dialect_list:
+                c.execute('INSERT INTO Jmdict_Sense_Dialect (SENSE_ID, VALUE) VALUES (?, ?)',
+                          (sense_id, dial.text))
 
         entries_processed += 1
     conn.commit()
