@@ -23,11 +23,9 @@ def drop_jmnedict_tables():
     c = conn.cursor()
     c.execute('''DROP TABLE Jmnedict_Kanji_Element''')
     c.execute('''DROP TABLE Jmnedict_Reading_Element''')
-    c.execute('''DROP TABLE Jmnedict_Reading_Relation''')
     c.execute('''DROP TABLE Jmnedict_Trans_Element''')
     c.execute('''DROP TABLE Jmnedict_Gloss''')
     c.execute('''DROP TABLE Jmnedict_Trans_Name_Type''')
-    c.execute('''DROP TABLE Jmnedict_Priority''')
     conn.commit()
     print("Dropped Jmnedict Tables")
 

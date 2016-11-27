@@ -114,18 +114,6 @@ def create_jmnedict_tables():
     c.execute('''CREATE INDEX Jmnedict_Reading_Element_ENTRY_ID_Index
                 ON Jmnedict_Reading_Element (ENTRY_ID)''')
 
-    # Reading Relation
-    c.execute('''CREATE TABLE Jmnedict_Reading_Relation
-                    (_ID INTEGER PRIMARY KEY,
-                     ENTRY_ID INTEGER NOT NULL,
-                     READING_ELEMENT_ID INTEGER NOT NULL,
-                     VALUE TEXT NOT NULL,
-                     FOREIGN KEY(READING_ELEMENT_ID) REFERENCES Jmnedict_Reading_Element(_ID))''')
-    c.execute('''CREATE INDEX Jmnedict_Reading_Relation_ENTRY_ID_Index
-                    ON Jmnedict_Reading_Relation (ENTRY_ID)''')
-    c.execute('''CREATE INDEX Jmnedict_Reading_Relation_READING_ELEMENT_ID_Index
-                    ON Jmnedict_Reading_Relation (READING_ELEMENT_ID)''')
-
     # Trans Element
     c.execute('''CREATE TABLE Jmnedict_Trans_Element
                 (_ID INTEGER PRIMARY KEY,
@@ -154,14 +142,6 @@ def create_jmnedict_tables():
     c.execute('''CREATE INDEX Jmnedict_Trans_Name_Type_TRANS_ELEMENT_ID_Index
                 ON Jmnedict_Trans_Name_Type (TRANS_ELEMENT_ID)''')
 
-    # Priority
-    c.execute('''CREATE TABLE Jmnedict_Priority
-            (_ID INTEGER PRIMARY KEY,
-             ENTRY_ID INTEGER NOT NULL,
-             VALUE TEXT NOT NULL,
-             TYPE TEXT CHECK (TYPE = 'Kanji_Element' OR TYPE = 'Reading_Element'))''')
-    c.execute('''CREATE INDEX Jmnedict_Priority_ENTRY_ID_Index
-            ON Jmnedict_Priority (ENTRY_ID)''')
 
     conn.commit()
     print("Created JMnedict Tables")
