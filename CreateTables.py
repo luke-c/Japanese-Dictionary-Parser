@@ -166,7 +166,11 @@ def create_user_tables():
     c.execute('''CREATE TABLE User_Favourites
                     (ENRTY_ID INTEGER PRIMARY KEY NOT NULL)''')
 
+    conn.commit()
+    print("Created User Tables")
+
 
 create_jmdict_tables()
 #create_jmnedict_tables()
+create_user_tables()
 conn.close()
