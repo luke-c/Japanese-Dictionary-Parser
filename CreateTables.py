@@ -159,6 +159,14 @@ def create_jmnedict_tables():
     print("Created JMnedict Tables")
 
 
+def create_user_tables():
+    c = conn.cursor()
+
+    # Favourites
+    c.execute('''CREATE TABLE User_Favourites
+                    (ENRTY_ID INTEGER PRIMARY KEY NOT NULL)''')
+
+
 create_jmdict_tables()
 #create_jmnedict_tables()
 conn.close()
