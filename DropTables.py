@@ -31,5 +31,5 @@ def drop_jmnedict_tables():
 
 
 drop_jmdict_tables()
-drop_jmnedict_tables()
+#drop_jmnedict_tables()
 conn.close()
