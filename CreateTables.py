@@ -14,6 +14,8 @@ def create_jmdict_tables():
              VALUE TEXT NOT NULL)''')
     c.execute('''CREATE INDEX Jmdict_Kanji_Element_ENTRY_ID_Index
             ON Jmdict_Kanji_Element (ENTRY_ID)''')
+    c.execute('''CREATE INDEX Jmdict_Kanji_Element_VALUE_Index
+            ON Jmdict_Kanji_Element (VALUE)''')
 
     # Reading Element
     c.execute('''CREATE TABLE Jmdict_Reading_Element
@@ -23,6 +25,8 @@ def create_jmdict_tables():
              NO_KANJI INTEGER NOT NULL)''')
     c.execute('''CREATE INDEX Jmdict_Reading_Element_ENTRY_ID_Index
             ON Jmdict_Reading_Element (ENTRY_ID)''')
+    c.execute('''CREATE INDEX Jmdict_Reading_Element_VALUE_Index
+                ON Jmdict_Reading_Element (VALUE)''')
 
     # Reading Relation
     c.execute('''CREATE TABLE Jmdict_Reading_Relation
@@ -54,6 +58,8 @@ def create_jmdict_tables():
             ON Jmdict_Gloss (ENTRY_ID)''')
     c.execute('''CREATE INDEX Jmdict_Gloss_SENSE_ID_Index
             ON Jmdict_Gloss (SENSE_ID)''')
+    c.execute('''CREATE INDEX Jmdict_Gloss_VALUE_Index
+                ON Jmdict_Gloss (VALUE)''')
 
     # Pos
     c.execute('''CREATE TABLE Jmdict_Sense_Pos
@@ -105,6 +111,8 @@ def create_jmnedict_tables():
                  VALUE TEXT NOT NULL)''')
     c.execute('''CREATE INDEX Jmnedict_Kanji_Element_ENTRY_ID_Index
                 ON Jmnedict_Kanji_Element (ENTRY_ID)''')
+    c.execute('''CREATE INDEX Jmnedict_Kanji_Element_VALUE_Index
+                    ON Jmnedict_Kanji_Element (VALUE)''')
 
     # Reading Element
     c.execute('''CREATE TABLE Jmnedict_Reading_Element
@@ -113,6 +121,8 @@ def create_jmnedict_tables():
                  VALUE TEXT NOT NULL)''')
     c.execute('''CREATE INDEX Jmnedict_Reading_Element_ENTRY_ID_Index
                 ON Jmnedict_Reading_Element (ENTRY_ID)''')
+    c.execute('''CREATE INDEX Jmnedict_Reading_Element_VALUE_Index
+                    ON Jmnedict_Reading_Element (VALUE)''')
 
     # Trans Element
     c.execute('''CREATE TABLE Jmnedict_Trans_Element
@@ -132,6 +142,8 @@ def create_jmnedict_tables():
             ON Jmnedict_Gloss (ENTRY_ID)''')
     c.execute('''CREATE INDEX Jmnedict_Gloss_TRANS_ELEMENT_ID_Index
             ON Jmnedict_Gloss (TRANS_ELEMENT_ID)''')
+    c.execute('''CREATE INDEX Jmnedict_Gloss_VALUE_Index
+                    ON Jmnedict_Gloss (VALUE)''')
 
     # Name Type
     c.execute('''CREATE TABLE Jmnedict_Trans_Name_Type
@@ -148,5 +160,5 @@ def create_jmnedict_tables():
 
 
 create_jmdict_tables()
-create_jmnedict_tables()
+#create_jmnedict_tables()
 conn.close()
