@@ -30,6 +30,13 @@ def drop_jmnedict_tables():
     print("Dropped Jmnedict Tables")
 
 
+def drop_user_tables():
+    c = conn.cursor()
+    c.execute('''DROP TABLE User_Favourites''')
+    conn.commit()
+    print("Dropped User Tables")
+
+
 drop_jmdict_tables()
 #drop_jmnedict_tables()
 conn.close()
