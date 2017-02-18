@@ -136,7 +136,7 @@ def create_jmnedict_tables():
             (_ID INTEGER PRIMARY KEY,
              ENTRY_ID INTEGER NOT NULL,
              TRANS_ELEMENT_ID INTEGER NOT NULL,
-             VALUE TEXT NOT NULL,
+             VALUE TEXT NOT NULL COLLATE NOCASE,
              FOREIGN KEY(TRANS_ELEMENT_ID) REFERENCES Jmnedict_Trans_Element(_ID))''')
     c.execute('''CREATE INDEX Jmnedict_Gloss_ENTRY_ID_Index
             ON Jmnedict_Gloss (ENTRY_ID)''')
