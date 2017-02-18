@@ -52,7 +52,7 @@ def create_jmdict_tables():
             (_ID INTEGER PRIMARY KEY,
              ENTRY_ID INTEGER NOT NULL,
              SENSE_ID INTEGER NOT NULL,
-             VALUE TEXT NOT NULL,
+             VALUE TEXT NOT NULL COLLATE NOCASE,
              FOREIGN KEY(SENSE_ID) REFERENCES Jmdict_Sense_Element(_ID))''')
     c.execute('''CREATE INDEX Jmdict_Gloss_ENTRY_ID_Index
             ON Jmdict_Gloss (ENTRY_ID)''')
