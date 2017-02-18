@@ -164,7 +164,7 @@ def create_user_tables():
 
     # Favourites
     c.execute('''CREATE TABLE User_Favourites
-                    (ENRTY_ID INTEGER PRIMARY KEY NOT NULL)''')
+                    (ENRTY_ID INTEGER PRIMARY KEY)''')
 
     conn.commit()
     print("Created User Tables")
