@@ -39,4 +39,5 @@ def drop_user_tables():
 
 drop_jmdict_tables()
 #drop_jmnedict_tables()
+drop_user_tables()
 conn.close()
