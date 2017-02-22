@@ -164,7 +164,13 @@ def create_user_tables():
 
     # Favourites
     c.execute('''CREATE TABLE User_Favourites
-                    (ENTRY_ID INTEGER PRIMARY KEY)''')
+                    (ENTRY_ID INTEGER PRIMARY KEY,
+                    SQLTIME TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL)''')
+
+    # History
+    c.execute('''CREATE TABLE User_History
+                        (ENTRY_ID INTEGER PRIMARY KEY,
+                        SQLTIME TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL)''')
 
     conn.commit()
     print("Created User Tables")
